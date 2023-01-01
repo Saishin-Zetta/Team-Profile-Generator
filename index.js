@@ -1,5 +1,6 @@
 const inquirer = require("inquirer")
 const path = require(`path`)
+const render = require(`./src/template.js`)
 const BlackCompanyEmployee = require(`./objects/BlackCompanyEmployee`)
 const BlackCompanyManager = require(`./objects/BlackCompanyManager`)
 const BlackCompanyEngineer = require(`./objects/BlackCompanyEngineer`)
@@ -49,12 +50,13 @@ function menu(){
             type: 'list',
             message: 'What kind of team member would you like to add?',
             name: 'memberChoice',
-            choices: [`engineer`,`intern`,`STOP ADDING MEMBERS`]
+            choices: [`Engineer`,`Intern`,`STOP ADDING MEMBERS`]
             },   
         ])
         .then((userChoise) => {
             switch(userChoise.memberChoice){
                 case `Engineer`:
+                    console.log(`hey it's picking fine`)
                     addEngineer();
                     break;
                 case `Intern`:
@@ -62,12 +64,14 @@ function menu(){
                     break;
                 default:
                     buildTeam()
+                    break;
 
             }
         }) 
     }
 
     function addEngineer(){
+        console.log(`Hey this works`)
         inquirer
         .prompt([
             {
@@ -96,11 +100,11 @@ function menu(){
             const engineer = new BlackCompanyEngineer(
                 info.engineerName,
                 info.engineerId,
-                answers.engineerEmail,
+                info.engineerEmail,
                 info.engineergitHub
             );
             team.push(engineer);
-            idHolder.push(answers.engineerId)
+            idHolder.push(info.engineerId)
             createTeam();
         })
     }
@@ -134,11 +138,11 @@ function menu(){
             const intern = new BlackCompanyIntern(
                 info.internName,
                 info.internId,
-                answers.internEmail,
+                info.internEmail,
                 info.internGitHub
             );
             team.push(intern);
-            idHolder.push(answers.internId)
+            idHolder.push(info.internId)
             createTeam();
         })
     }
@@ -147,12 +151,11 @@ function menu(){
         if(!fs.existsSync(DIST_DIR)) {
             fs.mkdirSync(DIST_DIR);
         }
-        fs.writeFileSync(distPath, render(teamMembers), `utf-8`);
+        fs.writeFileSync(distPath, render(team), `utf-8`);
     }
 
     createManager()
 }
 
 menu()
-// fs.writeFile("README.md", readmeContent, (err) =>
-//             err ? console.log(err): console.log("Successfully created your README.md file.")
+

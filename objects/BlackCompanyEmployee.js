@@ -19,7 +19,7 @@ class BlackCompanyEmployee {
     return this.email
   }
 
-  getID(){
+  getId(){
     return this.id
   }
   getRole(){
