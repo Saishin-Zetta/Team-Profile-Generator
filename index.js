@@ -16,6 +16,7 @@ const idHolder = []
 
 
 function menu(){
+    createManager()
     function createManager() {
         inquirer
         .prompt([
@@ -101,7 +102,7 @@ function menu(){
                 info.engineerName,
                 info.engineerId,
                 info.engineerEmail,
-                info.engineergitHub
+                info.engineerGitHub
             );
             team.push(engineer);
             idHolder.push(info.engineerId)
@@ -115,8 +116,7 @@ function menu(){
             {
             type: `input`,
             name: `internName`,
-            message: `What is the intern's name?`
-            
+            message: `What is the intern's name?`           
             },
             {
                 type: `input`,
@@ -152,9 +152,31 @@ function menu(){
             fs.mkdirSync(DIST_DIR);
         }
         fs.writeFileSync(distPath, render(team), `utf-8`);
+        lastQuestions();
     }
 
-    createManager()
+    function lastQuestions(){
+        inquirer
+        .prompt([
+            {
+                type: `list`,
+                name: `questions`,
+                message: `Would you like to put together a new team?`,
+                choices: [`yes`, `no`]
+            },
+        ])
+        .then((info) => {
+            switch(info.questions){
+                case `yes`:
+                    createManager();
+                    break;
+                case `no`:
+                    console.log(`Your team is ready to be reviewed on the html.`);
+                    break;
+
+            }
+        })
+    }
 }
 
 menu()
