@@ -35,9 +35,14 @@ function menu(){
             message: 'id?',
             name: 'id',
         },
+        {
+            type: 'input',
+            message: 'office number?',
+            name: 'officeNum',
+        },
         ])
         .then((info) => {
-            const manager = new BlackCompanyManager(info.name, info.email, info.id)
+            const manager = new BlackCompanyManager(info.name, info.email, info.id, info.officeNum)
             team.push(manager);
             idHolder.push(info.id);
             createTeam();
@@ -130,7 +135,7 @@ function menu(){
             },
             {
                 type: `input`,
-                name: `internSchool`,
+                name: `School`,
                 message: `What is the intern's school?`
             }
         ])
@@ -139,7 +144,7 @@ function menu(){
                 info.internName,
                 info.internId,
                 info.internEmail,
-                info.internGitHub
+                info.School,
             );
             team.push(intern);
             idHolder.push(info.internId)

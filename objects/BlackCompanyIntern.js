@@ -8,7 +8,7 @@ class BlackCompanyIntern extends BlackCompanyEmployee {
   
     }
     
-    getschool(){
+    getSchool(){
         return this.school
     }
 
