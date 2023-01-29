@@ -21,7 +21,7 @@ const generateGrunts = team => {
         <h6 class="card-subtitle mb-2 text-muted">${engineer.getRole()}</h6>
         <p class="card-text">${engineer.getId()}</p>
         <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
-        <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a>
+        <a href="https://github.com/${engineer.getGithub()}"> https://github.com/${engineer.getGithub()}</a>
         
     </div>
     </div>`
